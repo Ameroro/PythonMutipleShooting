@@ -125,7 +125,7 @@ def dynamics(x, u, SnakeModel):
 
 # Define parameters
 xt = opti.parameter(n, 1)
-xf = opti.parameter(n, 1)
+#xf = opti.parameter(n, 1)
 u_m = opti.parameter(m, 1)
 
 # Dynamic constraint
@@ -181,12 +181,12 @@ u_OL = sol.value(u)
 plt.figure(1)
 plt.subplot(3, 1, 1)
 plt.grid(True)
-plt.plot(ca.vertcat(0, ca.linspace(delta, T, N)), x_OL[0, :]-x_OL[1, :])
+plt.plot(np.linspace(0,T,N+1), np.array(x_OL[0, :]-x_OL[1, :]))
 plt.xlabel('t')
 plt.ylabel('x_1(t)')
 plt.xlim([0, T])
 plt.subplot(3, 1, 2)
-plt.plot(ca.vertcat(0, ca.linspace(delta, T, N)), x_OL[1, :] - x_OL[2,:])
+plt.plot(np.linspace(0,T,N+1), x_OL[1, :] - x_OL[2,:])
 plt.xlabel('t')
 plt.ylabel('x_2(t)')
 plt.xlim([0, T])
@@ -226,17 +226,17 @@ for ii in range(mpciterations):
     opti.set_initial(u, ca.horzcat(u_OL[:, 1:], u_OL[:, -1]))
 
     # Plot state space
-    plt.figure(2)
-    plt.plot(x_MPC[0, 0:ii+2], x_MPC[1, 0:ii+2], 'b')
-    plt.grid(True)
-    plt.plot(x_OL[0, :], x_OL[1, :], 'g')
-    plt.plot(x_MPC[0, 0:ii+2], x_MPC[1, 0:ii+2], 'ob')
-    plt.xlabel('x(1)')
-    plt.ylabel('x(2)')
-    plt.title('State Space')
-    plt.pause(0.01)
-    if ii == mpciterations-1 :
-        plt.show()
+    # plt.figure(2)
+    # plt.plot(x_MPC[0, 0:ii+2], x_MPC[1, 0:ii+2], 'b')<<
+    # plt.grid(True)
+    # plt.plot(x_OL[0, :], x_OL[1, :], 'g')
+    # plt.plot(x_MPC[0, 0:ii+2], x_MPC[1, 0:ii+2], 'ob')
+    # plt.xlabel('x(1)')
+    # plt.ylabel('x(2)')
+    # plt.title('State Space')
+    # plt.pause(0.01)
+    # if ii == mpciterations-1 :
+    #     plt.show()
     
     # Plot states
     plt.figure(4)
